@@ -1,6 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
-from selenium.webdriver.common.by import By
+import time
 
 
 promo = "?promo=newYear"
@@ -22,3 +22,12 @@ class ProductPage(BasePage):
     def add_product_to_basket(self):
         add_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
         add_button.click()
+
+    def check_book_title_in_success_popup_name(self):
+        assert self.browser.find_element(*ProductPageLocators.NAME_OF_PRODUCT_ALERT).text == self.browser.find_element(
+            *ProductPageLocators.NAME_OF_PRODUCT).text, "Names of item are different"
+
+    def check_book_title_in_success_popup_price(self):
+        assert self.browser.find_element(*ProductPageLocators.PRICE_OF_PRODUCT).text == self.browser.find_element(
+            *ProductPageLocators.PRICE_OF_PRODUCT_ALERT).text, "Prices of item are different"
+
