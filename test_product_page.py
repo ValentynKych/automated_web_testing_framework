@@ -62,11 +62,11 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.go_to_login_page()
 
 
-@pytest.mark.skip
+@pytest.mark.skip(reason="Depends on localization requirements")
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/"
     page = BasketPage(browser, link)
     page.open()
     page.should_be_basket_link()
     page.go_to_basket_page()
-    page.should_be_text_no_item()
+    page.should_show_basket_is_empty_text()
